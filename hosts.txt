@@ -1,0 +1,13 @@
+[staging_servers]
+myname  ansible_host=192.168.1.2  ansible_user=ubuntu  ansible_ssh_private_key_file=/home/ubuntu/.ssh/ssh-key1.pem 
+
+[prod_servers]
+myname1  ansible_host=172.31.27.16  ansible_user=ubuntu  ansible_ssh_private_key_file=/home/ubuntu/.ssh/ssh-key2.pem 
+myname2  ansible_host=172.31.27.13  ansible_user=ubuntu  ansible_ssh_private_key_file=/home/ubuntu/.ssh/ssh-key2.pem 
+
+[pass_key]
+myname3  ansible_host=172.31.27.13  ansible_user=ubuntu  ansible_pass=mypass123
+
+[All_prod:children]
+myname1
+myname2
