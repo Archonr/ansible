@@ -1,0 +1,23 @@
+---
+- name: Install Apache and Upload web Page
+  hosts: all
+  become: yes
+
+  vars:
+    source_file: ./MyWebSite/index.html
+    destin_file: /var/www/html
+
+  tasks:
+  - name: Install Apache Web Server
+    yum: name=httpd state=latest
+
+  - name: CopyMySite to servers
+    copy: src={{ source_sile }} dest={{destin_file}} mode=0555
+    notify: Restart Apache # Вызываем хэндлерс если файл изменился
+
+  - name: Start and Enable apache server
+    service: name=httpd state=started enabled=yes
+
+  handlers:
+  - name: Restart Apache
+    service: name=httpd state=restarted
